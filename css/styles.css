@@ -685,38 +685,76 @@ input.error, textarea.error, select.error{ border-color:#DC2626; }
 }
 
 /* Admin Navigation Buttons */
+/* Admin Navigation */
+.nav-admin-group {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-left: 0.5rem;
+}
+
 .btn-admin {
-  background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%) !important;
-  color: #fff !important;
-  border: 2px solid transparent !important;
-  padding: .5rem 1rem !important;
-  border-radius: 8px !important;
-  font-weight: 600 !important;
-  text-decoration: none !important;
-  transition: all .3s ease !important;
+  background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+  color: #fff;
+  border: 2px solid transparent;
+  padding: .5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all .3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-admin::before {
+  content: '👑';
+  font-size: 1.1em;
 }
 
 .btn-admin:hover {
-  background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%) !important;
+  background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%);
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(139,92,246,.3);
 }
 
 .btn-logout {
-  background: #EF4444 !important;
-  color: #fff !important;
-  border: 2px solid transparent !important;
-  padding: .5rem 1rem !important;
-  border-radius: 8px !important;
-  font-weight: 600 !important;
-  cursor: pointer !important;
-  transition: all .3s ease !important;
+  background: #EF4444;
+  color: #fff;
+  border: 2px solid transparent;
+  padding: .5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-logout::before {
+  content: '👋';
+  font-size: 1.1em;
 }
 
 .btn-logout:hover {
-  background: #DC2626 !important;
+  background: #DC2626;
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(239,68,68,.3);
+}
+
+/* Mobile Admin Navigation */
+@media (max-width: 840px) {
+  .nav-admin-group {
+    margin: 0.5rem 0;
+  }
+  
+  .btn-admin,
+  .btn-logout {
+    width: 100%;
+    justify-content: center;
+    padding: .7rem 1rem;
+  }
 }
 
 /* Lightbox */

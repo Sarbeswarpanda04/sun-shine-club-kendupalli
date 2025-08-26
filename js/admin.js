@@ -52,16 +52,35 @@ function initAdminPanel() {
 function checkAdminStatus() {
   const isLoggedIn = localStorage.getItem('adminLoggedIn') === 'true';
   const adminNav = document.getElementById('admin-nav');
-  const logoutNav = document.getElementById('logout-nav');
+  const logoutBtn = document.getElementById('logoutBtn');
   
-  if (isLoggedIn && adminNav && logoutNav) {
-    adminNav.style.display = 'block';
-    logoutNav.style.display = 'block';
-    
-    // Add logout functionality
-    const logoutBtn = document.getElementById('logoutBtn');
-    if (logoutBtn) {
+  if (adminNav && logoutBtn) {
+    if (isLoggedIn) {
+      // Show admin controls with smooth fade-in
+      adminNav.style.opacity = '0';
+      logoutBtn.style.opacity = '0';
+      
+      adminNav.style.display = 'flex';
+      logoutBtn.style.display = 'flex';
+      
+      // Trigger reflow
+      void adminNav.offsetWidth;
+      void logoutBtn.offsetWidth;
+      
+      // Add transition
+      adminNav.style.transition = 'opacity 0.3s ease-in-out';
+      logoutBtn.style.transition = 'opacity 0.3s ease-in-out';
+      
+      // Show buttons
+      adminNav.style.opacity = '1';
+      logoutBtn.style.opacity = '1';
+      
+      // Add logout functionality
       logoutBtn.addEventListener('click', adminLogout);
+    } else {
+      // Hide admin controls
+      adminNav.style.display = 'none';
+      logoutBtn.style.display = 'none';
     }
   }
 }
