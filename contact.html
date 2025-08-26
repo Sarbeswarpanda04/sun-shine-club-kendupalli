@@ -1,0 +1,104 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8"><title>Contact – Sun Shine Club</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600&display=swap">
+<script defer src="/js/app.js"></script>
+</head>
+<body data-page="contact">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header" role="banner" aria-label="Primary">
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label="Sun Shine Club home">
+      <img src="/assets/icons/logo.png" alt="" width="28" height="28" />
+      <span class="brand-text">Sun Shine Club</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation">☰</button>
+      <ul id="nav-menu" class="nav-list">
+        <li><a href="/" class="active">Home</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/members.html">Members</a></li>
+        <li><a href="/festivals.html">Festivals</a></li>
+        <li><a href="/gallery.html">Gallery</a></li>
+        <li><a href="/donate.html" class="btn btn-donate">Donate</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+        <li><a href="/notices.html">Notices</a></li>
+        <li><a href="/faq.html">FAQ</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main" class="container">
+  <h1 class="page-title">Contact Us</h1>
+
+  <section class="block reveal grid two">
+    <div style="grid-column: 1 / -1; text-align: center; margin-bottom: 1.5rem;">
+      <img src="/assets/contact/contact-banner.png" alt="Contact icons and phone" style="max-width: 100%; height: auto; border-radius: 14px; box-shadow: 0 6px 18px rgba(15,23,42,.08);">
+    </div>
+    <form id="contactForm" class="card" novalidate>
+      <h2>Send a Message</h2>
+      <label> Name <input name="name" required></label>
+      <label> Phone <input name="phone" type="tel" inputmode="numeric" pattern="[0-9]{10}" placeholder="10-digit" required></label>
+      <label> Email <input name="email" type="email"></label>
+      <label> Message <textarea name="message" rows="5" required></textarea></label>
+      <button class="btn btn-primary" type="submit">Submit</button>
+      <p class="muted small">We’ll respond soon.</p>
+    </form>
+
+    <div class="card">
+      <h2>Address</h2>
+      <address>Kendupalli, Barabati, Bhapur, Nayagarh, Odisha – 752077</address>
+      <p><strong>Phone:</strong> 
+      <p>Sarbeswar panda   : +91-8260916384</p>
+      <p>Suryakanta Panda  : +91-7853987250</p>
+      <p>Abinash Panda     : +91-7847006354</p>
+
+      <p><strong>Email:</strong> sunshineclub@gmail.com</p>
+      <div class="map-embed">
+        <iframe title="Map: Sun Shine Club"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2957.923594328762!2d85.25195597398613!3d20.280392413063602!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a188b003c73005b%3A0x96a924c6031760e6!2sSunshine%20Club%20Kendupalli!5e1!3m2!1sen!2sin!4v1756144936203!5m2!1sen!2sin"
+          width="400" height="400" style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+
+      <div class="social big">
+  <a href="#"><img src="/assets/icons/facebook.png" alt="" width="24" height="24"></a>
+  <a href="#"><img src="/assets/icons/instagram.png" alt="" width="24" height="24"></a>
+  <a href="https://www.youtube.com/@SunshineClubKendupalli"><img src="/assets/icons/youtube.png" alt="YouTube" width="26" height="26"></a>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <div class="brand small">
+        <img src="/assets/icons/logo.png" alt="" width="24" height="24" />
+        <span class="brand-text">Sun Shine Club</span>
+      </div>
+      <address class="address">
+        Kendupalli, Barabati, Bhapur, Nayagarh, Odisha – 752077
+      </address>
+      <p class="muted">© <span id="year"></span> Sun Shine Club. All rights reserved.</p>
+    </div>
+    <nav aria-label="Quick links">
+      <ul class="footer-links">
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/members.html">Members</a></li>
+        <li><a href="/festivals.html">Festivals</a></li>
+        <li><a href="/gallery.html">Gallery</a></li>
+        <li><a href="/donate.html">Donate</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="social">
+  <a href="#" aria-label="Facebook (placeholder)"><img src="/assets/icons/facebook.png" alt="" width="20" height="20"></a>
+  <a href="#" aria-label="Instagram (placeholder)"><img src="/assets/icons/instagram.png" alt="" width="20" height="20"></a>
+  <a href="https://www.youtube.com/@SunshineClubKendupalli" aria-label="YouTube"><img src="/assets/icons/youtube.png" alt="YouTube" width="22" height="22"></a>
+    </div>
+  </div>
+</footer>
+<div id="lightbox" class="lightbox" hidden>…</div><div id="toast" class="toast" hidden></div>
+</body></html>

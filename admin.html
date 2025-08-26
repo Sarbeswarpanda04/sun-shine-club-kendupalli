@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Admin Panel - Sun Shine Club</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap">
+  <script defer src="/js/app.js"></script>
+  <script defer src="/js/database.js"></script>
+  <script defer src="/js/config.js"></script>
+  <script defer src="/js/admin.js"></script>
+</head>
+<body data-page="admin">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Header -->
+  <header class="site-header" role="banner" aria-label="Primary">
+    <div class="container header-inner">
+      <a class="brand" href="/" aria-label="Sun Shine Club home">
+        <img src="/assets/icons/logo.png" alt="" width="28" height="28" />
+        <span class="brand-text">Sun Shine Club</span>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation">☰</button>
+        <ul id="nav-menu" class="nav-list">
+          <li><a href="/">Home</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/members.html">Members</a></li>
+          <li><a href="/festivals.html">Festivals</a></li>
+          <li><a href="/gallery.html">Gallery</a></li>
+          <li><a href="/donate.html" class="btn btn-donate">Donate</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+          <li><a href="/notices.html">Notices</a></li>
+          <li><a href="/faq.html">FAQ</a></li>
+          <li id="admin-nav" style="display: none;"><a href="/admin.html" class="btn btn-admin">Admin</a></li>
+          <li id="logout-nav" style="display: none;"><button class="btn btn-logout" id="logoutBtn">Logout</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <!-- Login Form -->
+    <div id="loginSection" class="login-container">
+      <div class="login-card">
+        <h1>Admin Login</h1>
+        <form id="adminLoginForm" novalidate>
+          <div class="form-group">
+            <label for="adminEmail">Email:</label>
+            <input type="email" id="adminEmail" name="email" required>
+            <div class="form-error" id="email-error"></div>
+          </div>
+          <div class="form-group">
+            <label for="adminPassword">Password:</label>
+            <input type="password" id="adminPassword" name="password" required>
+            <div class="form-error" id="password-error"></div>
+          </div>
+          <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div id="adminPanel" class="admin-panel" style="display: none;">
+      <div class="admin-header">
+        <h1>Admin Panel</h1>
+        <div class="admin-welcome">
+          Welcome, <span id="adminWelcome"></span>
+        </div>
+      </div>
+
+      <!-- Admin Navigation Tabs -->
+      <div class="admin-tabs">
+        <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+        <button class="tab-btn" data-tab="members">Members</button>
+        <button class="tab-btn" data-tab="gallery">Gallery</button>
+        <button class="tab-btn" data-tab="notices">Notices</button>
+        <button class="tab-btn" data-tab="settings">Settings</button>
+      </div>
+
+      <!-- Dashboard Tab -->
+      <div id="dashboard" class="tab-content active">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <h3>Total Members</h3>
+            <span class="stat-number" id="totalMembers">0</span>
+          </div>
+          <div class="stat-card">
+            <h3>Gallery Images</h3>
+            <span class="stat-number" id="totalImages">0</span>
+          </div>
+          <div class="stat-card">
+            <h3>Active Notices</h3>
+            <span class="stat-number" id="totalNotices">0</span>
+          </div>
+          <div class="stat-card">
+            <h3>Website Visits</h3>
+            <span class="stat-number">1,234</span>
+          </div>
+        </div>
+
+        <div class="recent-activity">
+          <h3>Recent Activity</h3>
+          <div class="activity-list" id="activityList">
+            <p class="muted">No recent activity</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Members Tab -->
+      <div id="members" class="tab-content">
+        <div class="section-header">
+          <h2>Manage Members</h2>
+          <button class="btn btn-primary" id="addMemberBtn">Add New Member</button>
+        </div>
+        
+        <div class="members-table-container">
+          <table class="admin-table" id="membersTable">
+            <thead>
+              <tr>
+                <th>Photo</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Position</th>
+                <th>ID</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="membersTableBody">
+              <!-- Dynamic content -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Gallery Tab -->
+      <div id="gallery" class="tab-content">
+        <div class="section-header">
+          <h2>Manage Gallery</h2>
+          <button class="btn btn-primary" id="addGalleryBtn">Add Images</button>
+        </div>
+        
+        <div class="gallery-years">
+          <select id="galleryYear" class="year-select">
+            <option value="2025">2025</option>
+            <option value="2024">2024</option>
+            <option value="2023">2023</option>
+            <option value="2022">2022</option>
+            <option value="2021">2021</option>
+          </select>
+        </div>
+
+        <div class="gallery-grid" id="adminGalleryGrid">
+          <!-- Dynamic content -->
+        </div>
+      </div>
+
+      <!-- Notices Tab -->
+      <div id="notices" class="tab-content">
+        <div class="section-header">
+          <h2>Manage Notices</h2>
+          <button class="btn btn-primary" id="addNoticeBtn">Add New Notice</button>
+        </div>
+        
+        <div class="notices-list" id="adminNoticesList">
+          <!-- Dynamic content -->
+        </div>
+      </div>
+
+      <!-- Settings Tab -->
+      <div id="settings" class="tab-content">
+        <div class="section-header">
+          <h2>Website Settings</h2>
+        </div>
+        
+        <div class="settings-grid">
+          <div class="setting-card">
+            <h3>Site Information</h3>
+            <form id="siteSettingsForm">
+              <div class="form-group">
+                <label>Club Name:</label>
+                <input type="text" id="clubName" value="Sun Shine Club">
+              </div>
+              <div class="form-group">
+                <label>Address:</label>
+                <textarea id="clubAddress" rows="3">Kendupalli, Barabati, Bhapur, Nayagarh, Odisha – 752077</textarea>
+              </div>
+              <div class="form-group">
+                <label>UPI ID:</label>
+                <input type="text" id="upiIdSetting" value="sunshineclubkendupalli@axl">
+              </div>
+              <button type="submit" class="btn btn-primary">Save Settings</button>
+            </form>
+          </div>
+
+          <div class="setting-card">
+            <h3>Social Media</h3>
+            <form id="socialSettingsForm">
+              <div class="form-group">
+                <label>Facebook URL:</label>
+                <input type="url" id="facebookUrl" placeholder="https://facebook.com/...">
+              </div>
+              <div class="form-group">
+                <label>Instagram URL:</label>
+                <input type="url" id="instagramUrl" placeholder="https://instagram.com/...">
+              </div>
+              <div class="form-group">
+                <label>YouTube URL:</label>
+                <input type="url" id="youtubeUrl" value="https://www.youtube.com/@SunshineClubKendupalli">
+              </div>
+              <button type="submit" class="btn btn-primary">Save Social Links</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modals -->
+  <!-- Add/Edit Member Modal -->
+  <div id="memberModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="memberModalTitle">Add New Member</h2>
+        <button class="modal-close" id="closeMemberModal">&times;</button>
+      </div>
+      <form id="memberForm">
+        <input type="hidden" id="memberIndex">
+        <div class="form-group">
+          <label for="memberName">Name:</label>
+          <input type="text" id="memberName" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="memberPhone">Phone Number:</label>
+          <input type="tel" id="memberPhone" name="phone" placeholder="e.g., +91 9876543210">
+        </div>
+        <div class="form-group">
+          <label for="memberPosition">Position:</label>
+          <select id="memberPosition" name="position">
+            <option value="">Select Position</option>
+            <option value="President">President</option>
+            <option value="Vice President">Vice President</option>
+            <option value="Secretary">Secretary</option>
+            <option value="Treasurer">Treasurer</option>
+            <option value="Committee Member">Committee Member</option>
+            <option value="Member">Member</option>
+            <option value="Honorary Member">Honorary Member</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="memberPhoto">Photo URL:</label>
+          <input type="text" id="memberPhoto" name="photo" required>
+        </div>
+        <div class="form-group">
+          <label for="memberAlt">Alt Text:</label>
+          <input type="text" id="memberAlt" name="alt">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="cancelMemberBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="saveMemberBtn">Save Member</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add/Edit Notice Modal -->
+  <div id="noticeModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="noticeModalTitle">Add New Notice</h2>
+        <button class="modal-close" id="closeNoticeModal">&times;</button>
+      </div>
+      <form id="noticeForm">
+        <input type="hidden" id="noticeId">
+        <div class="form-group">
+          <label for="noticeTitle">Title:</label>
+          <input type="text" id="noticeTitle" name="title" required>
+        </div>
+        <div class="form-group">
+          <label for="noticeDate">Date:</label>
+          <input type="date" id="noticeDate" name="date" required>
+        </div>
+        <div class="form-group">
+          <label for="noticeDetail">Details:</label>
+          <textarea id="noticeDetail" name="detail" rows="4" required></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="cancelNoticeBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="saveNoticeBtn">Save Notice</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ID Card Modal -->
+  <div id="idCardModal" class="modal" style="display: none;">
+    <div class="modal-content id-card-modal-content">
+      <div class="modal-header">
+        <h2>Member ID Card</h2>
+        <button class="modal-close" onclick="closeIDCardModal()">&times;</button>
+      </div>
+      
+      <!-- ID Card Preview -->
+      <div class="id-card-preview">
+        <div id="idCardCanvas" class="id-card">
+          <!-- Front side of ID card will be generated here -->
+        </div>
+      </div>
+      
+      <!-- Action buttons -->
+      <div class="id-card-actions">
+        <button class="btn btn-primary" onclick="downloadIDCard()">
+          📥 Download as JPG
+        </button>
+        <button class="btn btn-secondary" onclick="shareIDCard()">
+          📤 Share ID Card
+        </button>
+        <button class="btn btn-outline" onclick="printIDCard()">
+          🖨️ Print ID Card
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

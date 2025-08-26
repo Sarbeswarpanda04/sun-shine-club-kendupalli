@@ -1,0 +1,129 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8"><title>Donate – Sun Shine Club</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600&display=swap">
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+  (function(){
+    emailjs.init("fLCaOomGtLxy6qFDl");
+  })();
+</script>
+<script defer src="/js/app.js"></script>
+</head>
+<body data-page="donate">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header" role="banner" aria-label="Primary">
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label="Sun Shine Club home">
+      <img src="/assets/icons/logo.png" alt="" width="28" height="28" />
+      <span class="brand-text">Sun Shine Club</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation">☰</button>
+      <ul id="nav-menu" class="nav-list">
+        <li><a href="/" class="active">Home</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/members.html">Members</a></li>
+        <li><a href="/festivals.html">Festivals</a></li>
+        <li><a href="/gallery.html">Gallery</a></li>
+        <li><a href="/donate.html" class="btn btn-donate">Donate</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+        <li><a href="/notices.html">Notices</a></li>
+        <li><a href="/faq.html">FAQ</a></li>
+        <li id="admin-nav" style="display: none;"><a href="/admin.html" class="btn btn-admin">Admin</a></li>
+        <li id="logout-nav" style="display: none;"><button class="btn btn-logout" id="logoutBtn">Logout</button></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main" class="container">
+  <h1 class="page-title">Donate</h1>
+  <p class="lead">Support Sun Shine Club community activities.</p>
+
+  <section class="block reveal donate-grid">
+    <div class="card">
+      <h2>UPI Payment</h2>
+      <div class="upi-info">
+        <p><strong>UPI ID:</strong></p>
+        <code id="upiId">sunshineclubkendupalli@axl</code>
+      </div>
+      <img src="/assets/donate/payment-qr-code.png" alt="UPI QR code" class="qr">
+      <button class="btn btn-secondary" id="copyUpi">Copy UPI ID</button>
+    </div>
+
+    <form id="donateForm" class="card" novalidate>
+      <h2>Donation Form</h2>
+      <div class="form-grid">
+        <label> Name
+          <input name="name" type="text" autocomplete="name" required>
+        </label>
+        <label> Phone
+          <input name="phone" type="tel" inputmode="numeric" pattern="[0-9]{10}" placeholder="10-digit" required>
+        </label>
+        <label> Email
+          <input name="email" type="email" autocomplete="email">
+        </label>
+        <label> Amount (₹)
+          <input name="amount" type="number" min="1" required>
+        </label>
+        <label> Purpose
+          <select name="purpose" required>
+            <option>General</option>
+            <option>Festival Fund</option>
+            <option>Education Support</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <label> Message
+          <textarea name="message" rows="3" placeholder="Optional"></textarea>
+        </label>
+      </div>
+
+      <div class="pill-row">
+        <button type="button" data-amt="100" class="pill">₹100</button>
+        <button type="button" data-amt="251" class="pill">₹251</button>
+        <button type="button" data-amt="501" class="pill">₹501</button>
+        <button type="button" data-amt="1100" class="pill">₹1100</button>
+      </div>
+
+      <button class="submit-btn" type="submit">Pay Now via UPI</button>
+      <p class="muted small">Click submit to open your UPI app with pre-filled amount and ID.</p>
+      <p class="small"><a href="/assets/donate/annual-report.pdf">Annual Report (PDF)</a> (placeholder)</p>
+    </form>
+  </section>
+</main>
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="brand small">
+          <img src="/assets/icons/logo.png" alt="" width="24" height="24" />
+          <span class="brand-text">Sun Shine Club</span>
+        </div>
+        <address class="address">
+          Kendupalli, Barabati, Bhapur, Nayagarh, Odisha – 752077
+        </address>
+        <p class="muted">© <span id="year"></span> Sun Shine Club. All rights reserved.</p>
+      </div>
+      <nav aria-label="Quick links">
+        <ul class="footer-links">
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/members.html">Members</a></li>
+          <li><a href="/festivals.html">Festivals</a></li>
+          <li><a href="/gallery.html">Gallery</a></li>
+          <li><a href="/donate.html">Donate</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="social">
+        <a href="#" aria-label="Facebook (placeholder)"><img src="/assets/icons/facebook.png" alt="" width="20" height="20"></a>
+        <a href="#" aria-label="Instagram (placeholder)"><img src="/assets/icons/instagram.png" alt="" width="20" height="20"></a>
+        <a href="https://www.youtube.com/@SunshineClubKendupalli" aria-label="YouTube"><img src="/assets/icons/youtube.png" alt="YouTube" width="22" height="22"></a>
+      </div>
+    </div>
+  </footer>
+<div id="lightbox" class="lightbox" hidden>…</div><div id="toast" class="toast" hidden></div>
+<script defer src="/js/admin.js"></script>
+</body></html>
