@@ -342,6 +342,16 @@ async function deleteMember(index) {
     try {
       // Try to delete from database first
       if (window.db && member.id) {
+        // Delete photo from storage if it exists
+        if (member.photo && member.photo.includes('/storage/v1/object/public/')) {
+          try {
+            await db.deleteImage('members', member.photo.split('/public/')[1]);
+          } catch (imageError) {
+            console.warn('Failed to delete member photo:', imageError);
+          }
+        }
+
+        // Delete member record
         await db.deleteMember(member.id);
         toast(`✅ ${memberName} deleted from database.`);
         logActivity(`Deleted member from database: ${memberName}`);
@@ -366,14 +376,22 @@ function saveMember(e) {
   e.preventDefault();
   const formData = new FormData(e.target);
   const memberIndex = document.getElementById('memberIndex').value;
+  const photoInput = document.getElementById('photoInput');
   
   const memberData = {
     name: formData.get('name'),
     phone: formData.get('phone') || '',
     position: formData.get('position') || 'Member',
-    photo: formData.get('photo'),
     alt: formData.get('alt') || formData.get('name')
   };
+
+  // Handle photo file or URL
+  if (photoInput && photoInput.files && photoInput.files[0]) {
+    memberData.photoFile = photoInput.files[0]; // Store the actual file
+    memberData.photo = URL.createObjectURL(photoInput.files[0]); // Temporary URL for preview
+  } else {
+    memberData.photo = formData.get('photo') || ''; // Use existing photo URL if no new file
+  }
   
   if (memberIndex === '') {
     // Add new member
@@ -388,6 +406,25 @@ async function addNewMemberToDatabase(memberData) {
   try {
     // Try to add to database first
     if (window.db) {
+      // Handle file upload if it's present
+      if (memberData.photoFile) {
+        try {
+          // Create a File object from the input
+          const photoFile = memberData.photoFile instanceof File ? 
+            memberData.photoFile : 
+            await fetch(memberData.photo).then(r => r.blob()).then(blob => 
+              new File([blob], 'profile.jpg', { type: 'image/jpeg' })
+            );
+          
+          // Upload to storage and get URL
+          memberData.photo = await db.uploadImage(photoFile, 'members', 'profile');
+        } catch (uploadError) {
+          console.error('Failed to upload image:', uploadError);
+          toast('⚠️ Failed to upload image, but will continue with member creation');
+        }
+        delete memberData.photoFile; // Remove the file object before saving to database
+      }
+
       const newMember = await db.addMember(memberData);
       if (newMember) {
         // Add to local array with database ID
@@ -421,6 +458,31 @@ async function updateExistingMemberInDatabase(memberIndex, memberData) {
     
     // Try to update in database first
     if (window.db && existingMember.id) {
+      // Handle file upload if it's present
+      if (memberData.photoFile) {
+        try {
+          // Create a File object from the input
+          const photoFile = memberData.photoFile instanceof File ? 
+            memberData.photoFile : 
+            await fetch(memberData.photo).then(r => r.blob()).then(blob => 
+              new File([blob], 'profile.jpg', { type: 'image/jpeg' })
+            );
+          
+          // Delete old photo if it exists
+          if (existingMember.photo && existingMember.photo.includes('/storage/v1/object/public/')) {
+            await db.deleteImage('members', existingMember.photo.split('/public/')[1]);
+          }
+
+          // Upload new photo and get URL
+          memberData.photo = await db.uploadImage(photoFile, 'members', 'profile');
+        } catch (uploadError) {
+          console.error('Failed to handle image update:', uploadError);
+          toast('⚠️ Failed to update image, but will continue with other updates');
+          memberData.photo = existingMember.photo; // Keep old photo if upload fails
+        }
+        delete memberData.photoFile; // Remove the file object before saving to database
+      }
+
       const updatedMember = await db.updateMember(existingMember.id, memberData);
       if (updatedMember) {
         // Update local array
